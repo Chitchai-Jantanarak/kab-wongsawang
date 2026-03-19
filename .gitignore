@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Test
+coverage/
+
+# Turbo
+.turbo/
+
+# Prisma
+*.db
+*.db-journal
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+
+
+*.md
+.agents
+skills-lock.json

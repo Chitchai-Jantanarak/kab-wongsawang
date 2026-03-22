@@ -25,6 +25,9 @@
     --input: 30 10% 88%;
     --ring: 30 10% 50%;
     --radius: 0.65rem;
+    --app-font-sans: var(--font-cormorant), Georgia, serif;
+    --app-font-serif: var(--font-cormorant), Georgia, serif;
+    --app-font-mono: var(--font-menlo), Menlo, monospace;
   }
 
   .dark {
@@ -47,6 +50,9 @@
     --border: 25 8% 25%;
     --input: 25 8% 25%;
     --ring: 30 10% 55%;
+    --app-font-sans: var(--font-cormorant), Georgia, serif;
+    --app-font-serif: var(--font-cormorant), Georgia, serif;
+    --app-font-mono: var(--font-menlo), Menlo, monospace;
   }
 }
 

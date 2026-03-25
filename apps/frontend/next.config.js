@@ -5,9 +5,7 @@ const nextConfig = {
     domains: [],
     remotePatterns: [],
   },
-  experimental: {
-    typedRoutes: true,
-  },
+  typedRoutes: true
 };
 
 module.exports = nextConfig;

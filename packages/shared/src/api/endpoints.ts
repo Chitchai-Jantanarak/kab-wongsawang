@@ -5,7 +5,6 @@ import type {
   Booking,
   User,
   TimeSlot,
-  RoomFilters,
 } from "../types";
 import type {
   CreateBookingInput,

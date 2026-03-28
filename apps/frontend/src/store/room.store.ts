@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { api } from "@/lib/api";
-import type { Room, Floor, RoomType, TimeSlot } from "@sa/shared/types";
+import type { Room, TimeSlot } from "@sa/shared/types";
 import type { RoomFiltersInput } from "@sa/shared/schemas";
 
 interface RoomState {

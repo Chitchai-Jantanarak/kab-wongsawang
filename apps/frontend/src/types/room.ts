@@ -1,6 +1,7 @@
 export type Floor = 1 | 2 | 3 | 4 | 5;
 export type RoomType = "studio" | "loft" | "single" | "penthouse" | "facility";
 export type FacilityType = "garden" | "fitness" | "swimming-pool";
+import type { TimeSlot } from "@sa/shared/types";
 
 export interface Room {
   id: string;

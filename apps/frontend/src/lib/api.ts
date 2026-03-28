@@ -1,5 +1,5 @@
-import { configureApiClient, createApi } from "@sa/shared/api";
-import { getToken, setToken, removeToken } from "./auth";
+import { configureApiClient, createApiClient, createApi } from "@sa/shared/api";
+import { getToken, removeToken } from "./auth";
 
 configureApiClient({
   baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001",
@@ -16,10 +16,6 @@ configureApiClient({
   },
 });
 
-export const api = createApi(configureApiClient({
-  baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001",
-  timeout: 10000,
-  getToken,
-}));
+export const api = createApi(createApiClient());
 
-export { setToken, getToken, removeToken } from "./auth";
+export { getToken, removeToken } from "./auth";

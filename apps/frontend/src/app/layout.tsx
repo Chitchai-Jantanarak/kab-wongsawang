@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Menlo } from "next/font/google";
+import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-cormorant",
-  display: "swap",
-});
-
-const menlo = Menlo({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-menlo",
   display: "swap",
 });
 
@@ -30,10 +29,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${menlo.variable}`}
+      className={`${inter.variable} ${cormorant.variable}`}
       suppressHydrationWarning
     >
-      <body className="font-en antialiased">{children}</body>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

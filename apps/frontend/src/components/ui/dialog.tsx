@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 interface DialogContextValue {
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen: (value: boolean) => void;
 }
 
 const DialogContext = React.createContext<DialogContextValue | undefined>(
@@ -19,10 +19,17 @@ interface DialogProps {
 const Dialog: React.FC<DialogProps> = ({ children, open: controlledOpen, onOpenChange }) => {
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(false);
   const open = controlledOpen ?? uncontrolledOpen;
-  const setOpen = onOpenChange ?? setUncontrolledOpen;
+  
+  const handleSetOpen = React.useCallback((value: boolean) => {
+    if (onOpenChange) {
+      onOpenChange(value);
+    } else {
+      setUncontrolledOpen(value);
+    }
+  }, [onOpenChange]);
 
   return (
-    <DialogContext.Provider value={{ open, setOpen }}>
+    <DialogContext.Provider value={{ open, setOpen: handleSetOpen }}>
       {children}
     </DialogContext.Provider>
   );
@@ -62,17 +69,22 @@ const DialogPortal: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 const DialogOverlay = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
-      className
-    )}
-    onClick={() => context?.setOpen(false)}
-    {...props}
-  />
-));
+>(({ className, ...props }, ref) => {
+  const context = React.useContext(DialogContext);
+  if (!context) throw new Error("DialogOverlay must be used within Dialog");
+
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0",
+        className
+      )}
+      onClick={() => context.setOpen(false)}
+      {...props}
+    />
+  );
+});
 
 const DialogContent = React.forwardRef<
   HTMLDivElement,

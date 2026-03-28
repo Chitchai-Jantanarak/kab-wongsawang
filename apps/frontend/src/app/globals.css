@@ -25,9 +25,18 @@
     --input: 30 10% 88%;
     --ring: 30 10% 50%;
     --radius: 0.65rem;
-    --app-font-sans: var(--font-cormorant), Georgia, serif;
+    --app-font-sans: var(--font-inter), "Helvetica Neue", sans-serif;
     --app-font-serif: var(--font-cormorant), Georgia, serif;
-    --app-font-mono: var(--font-menlo), Menlo, monospace;
+    --app-font-mono: var(--font-inter), "Helvetica Neue", sans-serif;
+
+    /* KAB Theme Colors */
+    --tone-bg: #0a0907;
+    --tone-warm: #f5f2ee;
+    --tone-text: #ece8e1;
+    --tone-muted: rgba(236,232,225,0.45);
+    --tone-accent: #b89a60;
+    --tone-accent-light: rgba(184,154,96,0.15);
+    --tone-border: rgba(236,232,225,0.12);
   }
 
   .dark {
@@ -50,9 +59,9 @@
     --border: 25 8% 25%;
     --input: 25 8% 25%;
     --ring: 30 10% 55%;
-    --app-font-sans: var(--font-cormorant), Georgia, serif;
+    --app-font-sans: var(--font-inter), "Helvetica Neue", sans-serif;
     --app-font-serif: var(--font-cormorant), Georgia, serif;
-    --app-font-mono: var(--font-menlo), Menlo, monospace;
+    --app-font-mono: var(--font-inter), "Helvetica Neue", sans-serif;
   }
 }
 
@@ -60,7 +69,112 @@
   * {
     @apply border-border;
   }
+  html { scroll-behavior: smooth; }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-[family-name:var(--app-font-sans)];
+    background: var(--tone-bg);
+    color: var(--tone-text);
+    overflow-x: hidden;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-[family-name:var(--app-font-serif)];
   }
 }
+
+.label {
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--tone-muted);
+}
+
+.label-accent { color: var(--tone-accent); }
+
+.heading-xl {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.heading-lg {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.body-copy {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--tone-muted);
+}
+
+.hairline {
+  width: 32px;
+  height: 1px;
+  background: var(--tone-accent);
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border: 1px solid var(--tone-accent);
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--tone-accent);
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.25s, color 0.25s;
+}
+.btn:hover {
+  background: var(--tone-accent);
+  color: var(--tone-bg);
+}
+
+.field-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--tone-border);
+  padding: 0.5rem 0;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--tone-text);
+  outline: none;
+  transition: border-color 0.25s;
+}
+.field-input:focus { border-bottom-color: rgba(184,154,96,0.6); }
+.field-input::placeholder { color: rgba(236,232,225,0.25); font-style: italic; }
+
+.section-dark {
+  background: var(--tone-bg);
+  color: var(--tone-text);
+}
+.section-light {
+  background: var(--tone-warm);
+  color: #1a1510;
+}
+.section-mid {
+  background: #111009;
+  color: var(--tone-text);
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(5px); }
+}
+.scroll-bounce { animation: scrollBounce 2s ease-in-out infinite; }

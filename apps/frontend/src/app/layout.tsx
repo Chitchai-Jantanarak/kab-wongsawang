@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Cormorant_Garamond } from "next/font/google";
+import { Providers } from "@/components/providers/Providers";
 import "./globals.css";
 
 const inter = Inter({
@@ -16,9 +17,9 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Apartment Booking | Luxury Residence",
+  title: "KAB Reserve | Private Residences",
   description:
-    "Book your perfect space - rooms and facilities at our luxury residence",
+    "Experience refined living at KAB Reserve - exclusive private residences in the heart of Manhattan with unparalleled amenities and design.",
 };
 
 export default function RootLayout({
@@ -32,7 +33,9 @@ export default function RootLayout({
       className={`${inter.variable} ${cormorant.variable}`}
       suppressHydrationWarning
     >
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

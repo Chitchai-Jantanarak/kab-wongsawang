@@ -47,18 +47,51 @@ export default function BuyingSection() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(headRef.current, { opacity: 0, y: 36 }, {
-        opacity: 1, y: 0, duration: 1.1, ease: "power3.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 78%", once: true },
-      });
-      gsap.fromTo(Array.from(cardsRef.current?.children ?? []), { opacity: 0, y: 48 }, {
-        opacity: 1, y: 0, duration: 1, stagger: 0.14, ease: "power3.out",
-        scrollTrigger: { trigger: cardsRef.current, start: "top 80%", once: true },
-      });
-      gsap.fromTo(Array.from(statsRef.current?.children ?? []), { opacity: 0 }, {
-        opacity: 1, duration: 0.8, stagger: 0.1,
-        scrollTrigger: { trigger: statsRef.current, start: "top 88%", once: true },
-      });
+      gsap.fromTo(
+        headRef.current,
+        { opacity: 0, y: 36 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 78%",
+            once: true,
+          },
+        }
+      );
+      gsap.fromTo(
+        Array.from(cardsRef.current?.children ?? []),
+        { opacity: 0, y: 48 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          stagger: 0.14,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: "top 80%",
+            once: true,
+          },
+        }
+      );
+      gsap.fromTo(
+        Array.from(statsRef.current?.children ?? []),
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: statsRef.current,
+            start: "top 88%",
+            once: true,
+          },
+        }
+      );
     }, sectionRef);
     return () => ctx.revert();
   }, []);
@@ -67,60 +100,102 @@ export default function BuyingSection() {
     <section
       id="buying"
       ref={sectionRef}
-      className="section-light py-28 px-8"
+      className="section-light py-16 md:py-24 lg:py-28 px-5 md:px-10"
     >
-      <div className="max-w-[1080px] mx-auto">
-        <div ref={headRef} className="mb-16">
-          <div className="label mb-5 text-[var(--tone-accent)]">Ownership</div>
-          <h2 className="heading-xl text-[clamp(2rem,4.5vw,3.2rem)] text-[#1a1510] mb-5">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div ref={headRef} className="mb-10 md:mb-14">
+          <div
+            className="label mb-3"
+            style={{ color: "var(--tone-accent)" }}
+          >
+            Ownership
+          </div>
+          <h2
+            className="heading-xl mb-4"
+            style={{
+              fontSize: "clamp(1.8rem, 4.5vw, 3rem)",
+              color: "#1a1510",
+            }}
+          >
             Acquire a Residence
           </h2>
           <div className="hairline" />
         </div>
 
+        {/* Units Grid */}
         <div
           ref={cardsRef}
-          className="grid grid-cols-3 gap-[2px] max-md:grid-cols-1"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px"
+          style={{ background: "rgba(26,21,16,0.06)" }}
         >
           {units.map((u) => (
             <div
               key={u.id}
-              className="bg-white cursor-pointer overflow-hidden"
+              className="bg-white cursor-pointer overflow-hidden group"
             >
-              <div className="h-60 overflow-hidden">
+              {/* Image */}
+              <div className="h-48 md:h-56 lg:h-60 overflow-hidden">
                 <img
                   src={u.img}
                   alt={u.name}
-                  className="w-full h-full object-cover transition-transform duration-600 block"
+                  className="w-full h-full object-cover block transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
 
-              <div className="p-7">
+              {/* Content */}
+              <div className="p-5 md:p-6">
                 <div
-                  className={`label mb-2 ${
-                    u.status === "Signature"
-                      ? "text-[var(--tone-accent)]"
-                      : "text-[rgba(26,21,16,0.35)]"
-                  }`}
+                  className="label mb-2"
+                  style={{
+                    color:
+                      u.status === "Signature"
+                        ? "var(--tone-accent)"
+                        : "rgba(26,21,16,0.35)",
+                  }}
                 >
                   {u.id} &nbsp;·&nbsp; {u.status}
                 </div>
-                <h3 className="heading-lg text-[1.5rem] text-[#1a1510] mb-1">
+                <h3
+                  className="heading-lg mb-1"
+                  style={{ fontSize: "1.4rem", color: "#1a1510" }}
+                >
                   {u.name}
                 </h3>
-                <p className="font-serif text-[0.95rem] italic text-[rgba(26,21,16,0.45)] mb-5">
+                <p
+                  className="italic mb-4"
+                  style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: "0.9rem",
+                    color: "rgba(26,21,16,0.45)",
+                  }}
+                >
                   {u.floor} &nbsp;·&nbsp; {u.area}
                 </p>
 
-                <div className="h-[1px] bg-[rgba(26,21,16,0.07)] mb-5" />
+                <div
+                  className="h-px mb-4"
+                  style={{ background: "rgba(26,21,16,0.07)" }}
+                />
 
-                <div className="flex items-center justify-between">
-                  <span className="heading-lg text-[1.3rem] text-[#1a1510]">
+                <div className="flex items-center justify-between flex-wrap gap-3">
+                  <span
+                    className="heading-lg"
+                    style={{ fontSize: "1.2rem", color: "#1a1510" }}
+                  >
                     {u.price}
                   </span>
                   <button
-                    className="btn border-[rgba(26,21,16,0.25)] text-[rgba(26,21,16,0.65)] py-2 px-5"
-                    onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                    className="btn px-4 py-2 text-xs"
+                    style={{
+                      borderColor: "rgba(26,21,16,0.25)",
+                      color: "rgba(26,21,16,0.65)",
+                    }}
+                    onClick={() =>
+                      document
+                        .getElementById("contact")
+                        ?.scrollIntoView({ behavior: "smooth" })
+                    }
                   >
                     Inquire
                   </button>
@@ -130,21 +205,38 @@ export default function BuyingSection() {
           ))}
         </div>
 
+        {/* Stats */}
         <div
           ref={statsRef}
-          className="grid grid-cols-4 gap-0 mt-20 border-t border-b border-[rgba(26,21,16,0.08)] py-10"
+          className="grid grid-cols-2 md:grid-cols-4 gap-0 mt-12 md:mt-16 border-t border-b py-8 md:py-10"
+          style={{ borderColor: "rgba(26,21,16,0.08)" }}
         >
           {[
             { n: "40", l: "Floors" },
             { n: "12", l: "Residences" },
             { n: "24/7", l: "Concierge" },
-            { n: "∞", l: "Views" },
-          ].map(({ n, l }) => (
-            <div key={l} className="text-center border-r border-[rgba(26,21,16,0.08)] last:border-r-0">
-              <div className="heading-xl text-[2.2rem] text-[#1a1510]">
+            { n: "\u221E", l: "Views" },
+          ].map(({ n, l }, i) => (
+            <div
+              key={l}
+              className="text-center py-4 md:py-0"
+              style={{
+                borderRight:
+                  i < 3 ? "1px solid rgba(26,21,16,0.08)" : "none",
+              }}
+            >
+              <div
+                className="heading-xl mb-1"
+                style={{ fontSize: "clamp(1.6rem, 3vw, 2.2rem)", color: "#1a1510" }}
+              >
                 {n}
               </div>
-              <div className="label text-[rgba(26,21,16,0.35)] mt-1">{l}</div>
+              <div
+                className="label"
+                style={{ color: "rgba(26,21,16,0.35)" }}
+              >
+                {l}
+              </div>
             </div>
           ))}
         </div>

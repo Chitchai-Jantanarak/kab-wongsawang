@@ -1,4 +1,4 @@
-export type Floor = 1 | 2 | 3 | 4 | 5;
+export type Floor = 0 | 1 | 2 | 3 | 4 | 5;
 
 export type RoomType = "studio" | "loft" | "single" | "penthouse" | "facility";
 

@@ -8,7 +8,7 @@ import LocationSection from "@/components/LocationSection";
 import BuyingSection from "@/components/BuyingSection";
 import ReserveSection from "@/components/ReserveSection";
 import ContactSection from "@/components/ContactSection";
-import Footer from "./_components/Footer";
+import Footer from "@/components/Footer";
 import LenisScroll from "@/components/LenisScroll";
 
 export default function HomePage() {
@@ -17,7 +17,7 @@ export default function HomePage() {
       <LenisScroll />
       <Navbar />
       <Hero />
-      <main className="flex flex-col gap-12">
+      <main className="w-full">
         <RoomShowcase />
         <BlueprintSection />
         <LocationSection />

@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 interface DialogContextValue {
   open: boolean;
-  setOpen: (value: boolean) => void;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const DialogContext = React.createContext<DialogContextValue | undefined>(
@@ -19,17 +19,17 @@ interface DialogProps {
 const Dialog: React.FC<DialogProps> = ({ children, open: controlledOpen, onOpenChange }) => {
   const [uncontrolledOpen, setUncontrolledOpen] = React.useState(false);
   const open = controlledOpen ?? uncontrolledOpen;
-  
-  const handleSetOpen = React.useCallback((value: boolean) => {
+  const setOpen = (value: boolean | ((prev: boolean) => boolean)) => {
+    const newValue = typeof value === 'function' ? value(uncontrolledOpen) : value;
     if (onOpenChange) {
-      onOpenChange(value);
+      onOpenChange(newValue);
     } else {
-      setUncontrolledOpen(value);
+      setUncontrolledOpen(newValue);
     }
-  }, [onOpenChange]);
+  };
 
   return (
-    <DialogContext.Provider value={{ open, setOpen: handleSetOpen }}>
+    <DialogContext.Provider value={{ open, setOpen }}>
       {children}
     </DialogContext.Provider>
   );
@@ -72,7 +72,7 @@ const DialogOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const context = React.useContext(DialogContext);
   if (!context) throw new Error("DialogOverlay must be used within Dialog");
-
+  
   return (
     <div
       ref={ref}

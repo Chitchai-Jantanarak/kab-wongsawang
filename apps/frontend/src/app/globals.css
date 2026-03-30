@@ -178,3 +178,27 @@
   50%       { transform: translateY(5px); }
 }
 .scroll-bounce { animation: scrollBounce 2s ease-in-out infinite; }
+
+/* Hide scrollbar for tabs */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth transitions */
+.transition-400 {
+  transition-duration: 400ms;
+}
+
+/* Award-winning site aesthetics */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
